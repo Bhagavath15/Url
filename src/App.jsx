@@ -5,6 +5,7 @@ import './App.css'
 import { useFormik } from "formik";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Card from '@mui/material/Card';
 
 export default function App() {
 
@@ -16,31 +17,6 @@ export default function App() {
 }
 
 function ShortUrl() {
-
-  // const handleClick = () => {
-  //   console.log("clicked")
-  // }
-  // const { handleSubmit, handleChange, values } = useFormik({
-  //   initialValues: {
-  //     url: ""
-
-  //   },
-  //   // validationSchema: formValidationSchema,
-  //   onSubmit: (values) => {
-  //     console.log("clicked", values)
-  //   }
-  // });
-  // const addData = (newdata) => {
-  //   fetch("http://localhost:4006/shorten",
-  //     {
-  //       method: "POST",
-  //       body: JSON.stringify(values),
-  //       headers: {
-  //         "content-type": "application/json"
-  //       }
-  //     });
-
-  // };
   const [url, setUrl] = useState('');
   const [shortUrl, setShortUrl] = useState('');
   const [message, setMessage] = useState('');
@@ -49,7 +25,7 @@ function ShortUrl() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:4006/shorten', {
+      const response = await fetch('http://localhost:4006/api/shorten', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -72,31 +48,33 @@ function ShortUrl() {
     console.log(setUrl(e.target.value))
   }
   return (
-    <div>
-      <Button onClick={handleClear}>Clear</Button>
-      <form onSubmit={handleSubmit}>
-        <label>Original url</label>
-        <TextField
-          name="url"
-          label="url"
-          type="url"
-          value={url}
-          onChange={handleChange}
+    <Card sx={{ minWidth: 20 }} className="card">
+      <div >
+        <Button onClick={handleClear}>Clear</Button>
+        <form onSubmit={handleSubmit} className="form" >
+          <h2>Enter the url</h2>
+          <TextField
+            name="url"
+            label="url"
+            type="url"
+            value={url}
+            onChange={handleChange}
 
-        />
+          />
 
-        <Button type="submit">Submit</Button>
-      </form>
-      {message && <p>{message}</p>}
-      {shortUrl && (
-        <div>
-          <p>Shortened URL:</p>
-          <a href={shortUrl} >
-            {shortUrl}
-          </a>
-        </div>
-      )}
-    </div>
+          <Button type="submit">Submit</Button>
+        </form>
+        {message && <p>{message}</p>}
+        {shortUrl && (
+          <div>
+            <p>Shortened URL:</p>
+            <a href={shortUrl} >
+              {shortUrl}
+            </a>
+          </div>
+        )}
+      </div>
+    </Card>
   )
 }
 
