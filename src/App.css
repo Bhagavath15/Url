@@ -21,3 +21,56 @@ body {
     justify-content: center;
     align-items: center
 }
+
+/*-----login-----*/
+
+.loginform {
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.loginfield {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+
+    max-width: 250px;
+    padding: 80px;
+    gap: 10px;
+    align-content: center;
+    /* background: linear-gradient(-70deg, #fa7c30 30%, rgba(0, 0, 0, 0) 30%) */
+}
+
+.card .alreadyuser:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: dodgerblue
+}
+
+.login-card {
+    margin: 20px;
+    padding: 50px;
+
+}
+
+.card .btn {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logout {
+    margin: 20px
+}

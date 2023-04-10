@@ -5,26 +5,44 @@ import './App.css'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Card from '@mui/material/Card';
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { Login, Signin } from "./Login";
+import { ForgetPassword } from "./forgetPassword";
+import { VerifyOtp } from './verifyotp';
 
 export default function App() {
 
   return (
     <div className="App">
-      <ShortUrl />
+      <Routes>
+        <Route path="/" element={<Signin />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/forget-password" element={<ForgetPassword />} />
+        <Route path="/verifyotp" element={<VerifyOtp />} />
+        <Route path="/url-Shortening" element={<ProtectedRoute><ShortUrl /></ProtectedRoute>} />
+      </Routes>
     </div>
   )
 }
 
+function ProtectedRoute({ children }) {
+  const token = localStorage.getItem('token');
+  // const token=false;
+  return (
+    token ? <section>{children}</section> : <Navigate replace to="/" />
+    //  token? <section>{children}</section>:<h1>unautharaied</h1>
+  )
+}
 function ShortUrl() {
   const [url, setUrl] = useState('');
   const [shortUrl, setShortUrl] = useState('');
   const [message, setMessage] = useState('');
-
+  const navigate = useNavigate("")
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://url-backend-phi.vercel.app/api/shorten', {
+      const response = await fetch('https://url-backend-two.vercel.app/api/shorten', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,6 +64,13 @@ function ShortUrl() {
   }
   const handleChange = (e) => {
     console.log(setUrl(e.target.value))
+  }
+  const handleClick = () => {
+    localStorage.removeItem('token');
+    setTimeout(() => {
+      navigate("/login")
+    }, 1500);
+    console.log("logout")
   }
   return (
     <Card sx={{ m: 10 }} className="card">
@@ -78,6 +103,7 @@ function ShortUrl() {
           </div>
         )}
       </div>
+      <Button onClick={handleClick}>LOGOUT</Button>
     </Card>
   )
 }
