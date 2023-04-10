@@ -43,26 +43,31 @@ function ShortUrl() {
   const handleClear = () => {
     setUrl("")
     setShortUrl("")
+    setMessage("")
   }
   const handleChange = (e) => {
     console.log(setUrl(e.target.value))
   }
   return (
-    <Card sx={{ minWidth: 20 }} className="card">
+    <Card sx={{ m: 10 }} className="card">
       <div >
-        <Button onClick={handleClear}>Clear</Button>
+
         <form onSubmit={handleSubmit} className="form" >
           <h2>Enter the url</h2>
           <TextField
             name="url"
             label="url"
             type="url"
+            id="outlined-basic"
             value={url}
             onChange={handleChange}
 
           />
 
-          <Button type="submit">Submit</Button>
+          <div>
+            <Button type="submit">Submit</Button>
+            <Button onClick={handleClear}>Clear</Button>
+          </div>
         </form>
         {message && <p>{message}</p>}
         {shortUrl && (
