@@ -2,7 +2,6 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { useFormik } from "formik";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Card from '@mui/material/Card';
@@ -25,7 +24,7 @@ function ShortUrl() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:4006/api/shorten', {
+      const response = await fetch('https://url-backend-phi.vercel.app/api/shorten', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
